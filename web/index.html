@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excentoid Explorer — heyman.ai</title>
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div id="app">
+        <canvas id="gl-canvas"></canvas>
+
+        <div id="info-panel">
+            <h1>Excentoid Explorer</h1>
+            <p class="subtitle">A new family of geometric shapes</p>
+            <p class="credit">Based on <a href="https://ematlap.hu/gazdasag-technika-muveszet/excentoidok-egy-uj-geometriai-alakzatcsalad/" target="_blank" rel="noopener"><em>"Excentoidok – Egy új geometriai alakzatcsalád"</em></a> by Zsák Zoltán</p>
+        </div>
+
+        <div id="controls">
+            <div class="control-group">
+                <label>Shape</label>
+                <div class="shape-buttons" id="shape-buttons">
+                    <button class="shape-btn active" data-n="2">Duploid</button>
+                    <button class="shape-btn" data-n="3">Trioid</button>
+                    <button class="shape-btn" data-n="4">Quadroid</button>
+                    <button class="shape-btn" data-n="5">Pentaoid</button>
+                    <button class="shape-btn" data-n="6">Hexaoid</button>
+                    <button class="shape-btn" data-n="7">Heptaoid</button>
+                    <button class="shape-btn" data-n="8">Octaoid</button>
+                    <button class="shape-btn" data-n="9">Nonaoid</button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Eccentricity Ratio (ψ = r/e)</label>
+                <input type="range" id="psi-slider" min="1.5" max="8" step="0.01" value="1.5">
+                <span class="value-display" id="psi-value">1.500</span>
+            </div>
+
+            <div class="control-group">
+                <label>Anti-variant (toroidal)</label>
+                <label class="toggle">
+                    <input type="checkbox" id="anti-toggle">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+
+            <div class="control-group">
+                <label>Display</label>
+                <div class="display-buttons">
+                    <button class="display-btn active" data-mode="solid">Solid</button>
+                    <button class="display-btn" data-mode="wireframe">Wire</button>
+                    <button class="display-btn" data-mode="both">Both</button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Show Circles</label>
+                <label class="toggle">
+                    <input type="checkbox" id="circles-toggle" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+
+            <div class="control-group">
+                <label>Auto-Rotate</label>
+                <label class="toggle">
+                    <input type="checkbox" id="rotate-toggle" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+
+            <div class="control-group">
+                <label>Surface Resolution</label>
+                <input type="range" id="resolution-slider" min="16" max="128" step="4" value="64">
+                <span class="value-display" id="resolution-value">64</span>
+            </div>
+        </div>
+
+        <div id="math-panel">
+            <div id="math-content"></div>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

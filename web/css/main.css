@@ -1,0 +1,309 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #0a0a0f;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#gl-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: grab;
+}
+
+#gl-canvas:active {
+    cursor: grabbing;
+}
+
+/* Info Panel */
+#info-panel {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+#info-panel h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+#info-panel .subtitle {
+    font-size: 13px;
+    color: #888;
+    margin-top: 2px;
+}
+
+#info-panel .credit {
+    font-size: 14px;
+    color: #999;
+    margin-top: 6px;
+}
+
+#info-panel .credit a {
+    color: #aac8e8;
+    text-decoration: none;
+    pointer-events: auto;
+}
+
+#info-panel .credit a:hover {
+    color: #7ab5ff;
+    text-decoration: underline;
+}
+
+/* Controls Panel */
+#controls {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 260px;
+    background: rgba(15, 15, 25, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px;
+    backdrop-filter: blur(12px);
+    z-index: 10;
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+}
+
+.control-group {
+    margin-bottom: 14px;
+}
+
+.control-group:last-child {
+    margin-bottom: 0;
+}
+
+.control-group > label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #888;
+    margin-bottom: 6px;
+}
+
+/* Shape Buttons */
+.shape-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.shape-btn {
+    flex: 1 0 calc(50% - 2px);
+    padding: 6px 4px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: #aaa;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.shape-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.shape-btn.active {
+    background: rgba(80, 140, 255, 0.2);
+    border-color: rgba(80, 140, 255, 0.5);
+    color: #7ab5ff;
+}
+
+/* Display Mode Buttons */
+.display-buttons {
+    display: flex;
+    gap: 4px;
+}
+
+.display-btn {
+    flex: 1;
+    padding: 6px 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: #aaa;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.display-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.display-btn.active {
+    background: rgba(80, 140, 255, 0.2);
+    border-color: rgba(80, 140, 255, 0.5);
+    color: #7ab5ff;
+}
+
+/* Sliders */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    outline: none;
+    margin: 8px 0 4px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: #7ab5ff;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #0a0a0f;
+}
+
+.value-display {
+    font-size: 11px;
+    color: #7ab5ff;
+    font-family: 'SF Mono', 'Consolas', monospace;
+}
+
+/* Toggle Switch */
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 22px;
+    cursor: pointer;
+}
+
+.toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 11px;
+    transition: 0.2s;
+}
+
+.toggle-slider::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: 3px;
+    bottom: 3px;
+    background: #666;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+.toggle input:checked + .toggle-slider {
+    background: rgba(80, 140, 255, 0.3);
+}
+
+.toggle input:checked + .toggle-slider::before {
+    transform: translateX(18px);
+    background: #7ab5ff;
+}
+
+/* Math Panel */
+#math-panel {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    max-width: 400px;
+    background: rgba(15, 15, 25, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 12px 16px;
+    backdrop-filter: blur(12px);
+    z-index: 10;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+#math-panel .label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+#math-panel .equation {
+    font-family: 'SF Mono', 'Consolas', monospace;
+    color: #7ab5ff;
+    font-size: 11px;
+    margin: 2px 0;
+}
+
+#math-panel .param {
+    color: #aaa;
+    font-size: 11px;
+}
+
+#math-panel .param span {
+    color: #e8c170;
+}
+
+/* Scrollbar */
+#controls::-webkit-scrollbar {
+    width: 4px;
+}
+
+#controls::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#controls::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+}
+
+@media (max-width: 640px) {
+    #controls {
+        width: 200px;
+        padding: 12px;
+    }
+
+    .shape-btn {
+        font-size: 10px;
+        padding: 5px 3px;
+    }
+
+    #math-panel {
+        max-width: calc(100vw - 32px);
+        font-size: 11px;
+    }
+
+    #info-panel h1 {
+        font-size: 18px;
+    }
+}
